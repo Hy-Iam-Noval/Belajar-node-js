@@ -18,7 +18,13 @@ class HomeController{
         res.send(req.body)
     }
 
-    edit(req)
+    edit(req, res){
+        this.model.connect.query(`SELECT * FROM node where id = ${res.id}`, (err , result)=>{
+            res.render('show', {
+                datas : result
+            })
+        })
+    }
 }
 
 module.exports.HomeController = HomeController
